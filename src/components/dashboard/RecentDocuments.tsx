@@ -13,7 +13,7 @@ const documents: Document[] = [
         name: 'Statement of Purpose - Stanford',
         type: 'Application',
         uploadDate: new Date('2024-03-01'),
-        url: '',
+        fileUrl: '',
         university: 'Stanford University',
         status: 'pending'
     },

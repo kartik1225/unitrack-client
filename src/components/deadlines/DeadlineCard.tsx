@@ -43,14 +43,6 @@ export const DeadlineCard: React.FC<DeadlineCardProps> = ({
         });
     };
 
-    const getPriorityColor = (priority: string) => {
-        switch (priority) {
-            case 'high': return 'text-red-500';
-            case 'medium': return 'text-yellow-500';
-            case 'low': return 'text-green-500';
-            default: return 'text-gray-500';
-        }
-    };
 
     return (
         <Card className={`${isOverdue ? 'border-red-200 bg-red-50' : ''}`}>

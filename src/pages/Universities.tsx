@@ -28,7 +28,8 @@ const Universities: React.FC = () => {
                         'Three Letters of Recommendation'
                     ]
                 }
-            ]
+            ],
+            isActive: true
         },
         {
             id: '2',
@@ -47,7 +48,8 @@ const Universities: React.FC = () => {
                         'Two Letters of Recommendation'
                     ]
                 }
-            ]
+            ],
+            isActive: true
         }
     ]);
 

@@ -32,7 +32,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
         }
 
         try {
-            const url = await uploadFile(file, user.uid, type);
+            const url = await uploadFile(file, user.id, type);
             onUploadComplete(url);
         } catch (err) {
             if (err instanceof Error && onUploadError) {

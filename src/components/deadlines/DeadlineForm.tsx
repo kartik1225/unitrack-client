@@ -42,12 +42,12 @@ export const DeadlineForm: React.FC<DeadlineFormProps> = ({
         e.preventDefault();
 
         // Ensure `formData` adheres to the `Deadline` structure
-        const deadlineData: Deadline = {
+        const deadlineData = {
             id: deadline?.id || Date.now().toString(), // Ensure `id` matches the `Deadline` type
             ...formData, // Spread `formData`, assuming it matches `Deadline`
         };
 
-        onSubmit(deadlineData);
+        onSubmit(deadlineData as Deadline);
     };
 
     return (

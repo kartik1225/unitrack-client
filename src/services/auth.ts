@@ -55,8 +55,8 @@ class FirebaseAuthService implements AuthService {
         const user = auth.currentUser;
         if (!user) throw new Error('No user logged in');
 
-        if (userData.displayName) {
-            await updateProfile(user, { displayName: userData.displayName });
+        if (userData.name) {
+            await updateProfile(user, { displayName: userData.name });
         }
 
         await setDoc(doc(db, 'users', user.uid), userData, { merge: true });
@@ -81,7 +81,13 @@ class FirebaseAuthService implements AuthService {
     private async enrichUserData(user: FirebaseUser): Promise<User> {
         const userDoc = await getDoc(doc(db, 'users', user.uid));
         const userData = userDoc.data();
-        return { ...user, ...userData } as User;
+        return {
+            id: user.uid,
+            name: user.displayName || '',
+            email: user.email || '',
+            avatarUrl: user.photoURL || '',
+            ...userData,
+        }
     }
 }
 

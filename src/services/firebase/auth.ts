@@ -9,7 +9,7 @@ import {
     signInWithPopup,
     User as FirebaseUser
 } from 'firebase/auth';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
+import {doc, setDoc, getDoc} from 'firebase/firestore';
 import {User} from "../../types";
 import {auth, db} from "../../config/firebase.client.ts";
 
@@ -25,20 +25,20 @@ export interface AuthService {
 
 class FirebaseAuthService implements AuthService {
     async signUp(email: string, password: string, userData: Partial<User>): Promise<User> {
-        const { user } = await createUserWithEmailAndPassword(auth, email, password);
+        const {user} = await createUserWithEmailAndPassword(auth, email, password);
         await this.createUserProfile(user, userData);
         await sendEmailVerification(user);
         return this.enrichUserData(user);
     }
 
     async signIn(email: string, password: string): Promise<User> {
-        const { user } = await signInWithEmailAndPassword(auth, email, password);
+        const {user} = await signInWithEmailAndPassword(auth, email, password);
         return this.enrichUserData(user);
     }
 
     async signInWithGoogle(): Promise<User> {
         const provider = new GoogleAuthProvider();
-        const { user } = await signInWithPopup(auth, provider);
+        const {user} = await signInWithPopup(auth, provider);
         await this.createUserProfile(user, {});
         return this.enrichUserData(user);
     }
@@ -55,11 +55,11 @@ class FirebaseAuthService implements AuthService {
         const user = auth.currentUser;
         if (!user) throw new Error('No user logged in');
 
-        if (userData.displayName) {
-            await updateProfile(user, { displayName: userData.displayName });
+        if (userData.name) {
+            await updateProfile(user, {displayName: userData.name});
         }
 
-        await setDoc(doc(db, 'users', user.uid), userData, { merge: true });
+        await setDoc(doc(db, 'users', user.uid), userData, {merge: true});
     }
 
     async getCurrentUser(): Promise<User | null> {
@@ -81,7 +81,14 @@ class FirebaseAuthService implements AuthService {
     private async enrichUserData(user: FirebaseUser): Promise<User> {
         const userDoc = await getDoc(doc(db, 'users', user.uid));
         const userData = userDoc.data();
-        return { ...user, ...userData } as User;
+
+        return {
+            id: user.uid,
+            email: user.email || '',
+            name: user.displayName || '',
+            avatarUrl: user.photoURL || '',
+            ...userData
+        }
     }
 }
 

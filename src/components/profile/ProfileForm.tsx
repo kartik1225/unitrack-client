@@ -107,7 +107,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user, onUpdate }) => {
                         <div className="space-y-2">
                             <Label>Preferred Programs</Label>
                             <div className="flex flex-wrap gap-2">
-                                {formData.preferredPrograms.map((program, index) => (
+                                {formData.preferredPrograms && formData.preferredPrograms.map((program, index) => (
                                     <div
                                         key={index}
                                         className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm"
@@ -118,10 +118,11 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user, onUpdate }) => {
                                                 type="button"
                                                 className="ml-2 text-primary hover:text-primary/70"
                                                 onClick={() => {
-                                                    setFormData(prev => ({
-                                                        ...prev,
-                                                        preferredPrograms: prev.preferredPrograms.filter((_, i) => i !== index)
-                                                    }));
+                                                        setFormData(prev => ({
+                                                            ...prev,
+                                                            preferredPrograms: prev.preferredPrograms?.filter((_, i) => i !== index)
+                                                        }));
+
                                                 }}
                                             >
                                                 ×

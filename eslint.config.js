@@ -25,6 +25,8 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+      // allow this "TS6133: props is declared but its value is never read."
+      'no-unused-vars': 'off',
     },
   },
 )

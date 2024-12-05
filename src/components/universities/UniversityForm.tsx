@@ -69,7 +69,7 @@ export const UniversityForm: React.FC<UniversityFormProps> = ({
         e.preventDefault();
         onSubmit({
             id: Date.now().toString(),
-            ...formData as University
+            ...formData as Omit<University, 'id'>
         });
         setFormData({
             name: '',

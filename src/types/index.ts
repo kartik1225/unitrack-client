@@ -18,10 +18,10 @@ export interface Deadline {
     university: string;
     program: string;
     deadline: Date;
-    type: 'Application' | 'Document' | 'Interview' | 'Decision';
+    type: string;
     reminderSet: boolean;
     reminderDate?: Date;
-    priority: 'high' | 'medium' | 'low';
+    priority: string;
     notes?: string;
     completed: boolean;
     [key: string]: any;
