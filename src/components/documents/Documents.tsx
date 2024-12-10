@@ -15,7 +15,7 @@ const Documents: React.FC = () => {
             name: 'I-20 Form - Stanford',
             type: 'I-20',
             uploadDate: new Date('2024-03-01'),
-            fileUrl: '',
+            fileUrl: 'https://hio.harvard.edu/sites/hio.harvard.edu/files/Form%20I-20%20SAMPLE.pdf',
             university: 'Stanford University',
             status: 'pending',
             notes: 'Awaiting university verification'
@@ -25,7 +25,7 @@ const Documents: React.FC = () => {
             name: 'Statement of Purpose - MIT',
             type: 'Application',
             uploadDate: new Date('2024-03-02'),
-            fileUrl: '',
+            fileUrl: 'https://www.uc.edu/content/dam/refresh/learning-commons-62/awc/awc-grad/sample-statement-handout-spring-2021.pdf',
             university: 'MIT',
             status: 'approved',
             notes: 'Final version'

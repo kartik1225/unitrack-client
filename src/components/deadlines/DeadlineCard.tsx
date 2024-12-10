@@ -8,7 +8,8 @@ import {
     Trash2,
     CheckCircle,
     School,
-    AlertCircle
+    AlertCircle,
+    CalendarPlus
 } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 import type { Deadline } from '@/types';
@@ -43,6 +44,19 @@ export const DeadlineCard: React.FC<DeadlineCardProps> = ({
         });
     };
 
+    const addToCalendar = () => {
+        // Create calendar event data
+        const eventTitle = `${deadline.type} Deadline - ${deadline.university}`;
+        const eventDescription = `Program: ${deadline.program}\nNotes: ${deadline.notes || 'No additional notes'}`;
+        const eventStart = new Date(deadline.deadline);
+        const eventEnd = new Date(deadline.deadline);
+
+        // Create Google Calendar URL
+        const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&details=${encodeURIComponent(eventDescription)}&dates=${eventStart.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '')}/${eventEnd.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '')}`;
+
+        // Open in new window
+        window.open(googleCalendarUrl, '_blank');
+    };
 
     return (
         <Card className={`${isOverdue ? 'border-red-200 bg-red-50' : ''}`}>
@@ -60,13 +74,13 @@ export const DeadlineCard: React.FC<DeadlineCardProps> = ({
                             <div className="flex items-center gap-2 mt-2">
                                 <Calendar className="h-4 w-4" />
                                 <span className="text-sm">
-                  Due: {formatDate(deadline.deadline)}
+                                    Due: {formatDate(deadline.deadline)}
                                     {!deadline.completed && (
                                         <span className={`ml-2 ${isOverdue ? 'text-red-500' : 'text-muted-foreground'}`}>
-                      ({isOverdue ? 'Overdue' : `${daysUntil} days left`})
-                    </span>
+                                            ({isOverdue ? 'Overdue' : `${daysUntil} days left`})
+                                        </span>
                                     )}
-                </span>
+                                </span>
                             </div>
                             {deadline.notes && (
                                 <p className="text-sm text-muted-foreground mt-2">
@@ -99,6 +113,16 @@ export const DeadlineCard: React.FC<DeadlineCardProps> = ({
                                 <Bell className="h-4 w-4 mr-2" />
                             )}
                             {deadline.reminderSet ? 'Remove Reminder' : 'Set Reminder'}
+                        </Button>
+
+                        <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={addToCalendar}
+                            className="text-primary"
+                        >
+                            <CalendarPlus className="h-4 w-4 mr-2" />
+                            Add to Calendar
                         </Button>
 
                         <Button

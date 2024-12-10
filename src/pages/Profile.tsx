@@ -6,8 +6,8 @@ import type { User } from '@/types';
 const Profile: React.FC = () => {
     const [user, setUser] = useState<User>({
         id: '1',
-        name: 'John Doe',
-        email: 'john.doe@example.com',
+        name: 'Kartik Garasiya',
+        email: 'kartik@unitrack.com',
         targetCountry: 'United States',
         preferredPrograms: ['Computer Science', 'Data Science'],
         avatarUrl: '/api/placeholder/150/150'

@@ -50,6 +50,28 @@ const Universities: React.FC = () => {
                 }
             ],
             isActive: true
+        },
+        {
+            id: '3',
+            name: 'Southern New Hampshire University',
+            country: 'United States',
+            programs: [
+                {
+                    id: 'p3',
+                    name: 'Information Technology',
+                    degree: 'Masters',
+                    department: 'School of Engineering and Computing',
+                    deadline: new Date('2024-08-15'),
+                    requirements: [
+                        'GRE Not Required',
+                        'TOEFL/IELTS Required for International Students',
+                        'No Letters of Recommendation Required',
+                        'Minimum GPA of 2.75',
+                        'Bachelor\'s degree from an accredited institution'
+                    ]
+                }
+            ],
+            isActive: true
         }
     ]);
 

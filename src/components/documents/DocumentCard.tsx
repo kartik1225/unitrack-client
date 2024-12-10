@@ -4,17 +4,16 @@ import {
     CardContent,
     CardFooter
 } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import {Button} from '@/components/ui/button';
 import {
-    Download,
     Trash2,
     FileText,
     CheckCircle,
     Clock,
     XCircle
 } from 'lucide-react';
-import { formatDate } from '@/lib/utils';
-import type { Document } from '@/types';
+import {formatDate} from '@/lib/utils';
+import type {Document} from '@/types';
 
 interface DocumentCardProps {
     document: Document;
@@ -26,9 +25,9 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
                                                               onDelete
                                                           }) => {
     const statusIcons = {
-        pending: <Clock className="h-4 w-4 text-yellow-500" />,
-        approved: <CheckCircle className="h-4 w-4 text-green-500" />,
-        rejected: <XCircle className="h-4 w-4 text-red-500" />
+        pending: <Clock className="h-4 w-4 text-yellow-500"/>,
+        approved: <CheckCircle className="h-4 w-4 text-green-500"/>,
+        rejected: <XCircle className="h-4 w-4 text-red-500"/>
     };
 
     return (
@@ -37,7 +36,7 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
                 <div className="flex items-start justify-between">
                     <div className="flex items-start space-x-4">
                         <div className="p-2 bg-primary/10 rounded-full">
-                            <FileText className="h-5 w-5 text-primary" />
+                            <FileText className="h-5 w-5 text-primary"/>
                         </div>
                         <div>
                             <h3 className="font-medium">{document.name}</h3>
@@ -64,11 +63,12 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
                 <div className="flex items-center justify-between w-full">
                     <Button variant="ghost" size="sm" className="text-destructive"
                             onClick={() => onDelete(document.id)}>
-                        <Trash2 className="h-4 w-4 mr-2" />
+                        <Trash2 className="h-4 w-4 mr-2"/>
                         Delete
                     </Button>
-                    <Button variant="secondary" size="sm">
-                        <Download className="h-4 w-4 mr-2" />
+                    <Button variant="secondary" size="sm" onClick={() => {
+                        window.open(document.fileUrl, '_blank');
+                    }}>
                         Download
                     </Button>
                 </div>
